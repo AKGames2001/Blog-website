@@ -168,7 +168,7 @@ def contact():
 
 
 @app.route("/new-post", methods=["GET", "POST"])
-@admin_only
+@login_required
 def add_new_post():
     form = CreatePostForm()
     if form.validate_on_submit():
@@ -185,8 +185,6 @@ def add_new_post():
         return redirect(url_for("get_all_posts"))
 
     return render_template("make-post.html", form=form, current_user=current_user)
-
-
 
 
 @app.route("/edit-post/<int:post_id>", methods=["GET", "POST"])
